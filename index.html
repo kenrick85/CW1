@@ -5,60 +5,156 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+     <!-- Custom fonts for this theme -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="css/freelancer.min.css" rel="stylesheet">
+    <script src="script.js"></script> 
+    
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>      
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
+    <link href="css/freelancer.min.css" rel="stylesheet">
+    <script src="script.js"></script> 
+
+    
 
     <title>The student activity app </title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    
+      
     </head>
 
     <body>
-        <div class="container">
-
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <a class="navbar-brand" href="#">Navbar</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                      <span class="navbar-toggler-icon"></span>
-                      <span class="navbar-toggler-icon"></span>
-                    </button>
-                  
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                      <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown
-                          </a>
-                          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                          </div>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link disabled" href="#">Disabled</a>
-                        </li>
-                      </ul>
-                      <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                      </form>
-                    </div>
-                  </nav>
+          <!-- Navigation -->
+          <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+              <div class="container">
+                <a class="navbar-brand js-scroll-trigger" href="#page-top">Student Area</a>
+                <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                  Menu
+                  <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                  <ul class="navbar-nav ml-auto">
+                    <li class="nav-item mx-0 mx-lg-1">
+                      <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">Portfolio</a>
+                    </li>
+                    <li class="nav-item mx-0 mx-lg-1">
+                      <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a>
+                    </li>
+                    <li class="nav-item mx-0 mx-lg-1">
+                      <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Contact</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </nav>  
+            <div class="container">
         </div>
         
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <div id="app">
+  
+<form id="courses1">
+    <h2>Create New Topic</h2>
+    Topic Name:     <input type="text" v-model="inputTopic"   id="inputTopic" name="inputTopic" autofocus>
+    Topic Location: <input type="text" v-model="inputLocation" id="inputLocation" name="inputLocation">
+    Topic Price €:    <input type="text" v-model="inputPrice" id="inputPrice" name="inputPrice">
+    Topic Time:     <input type="text" v-model="inputTime" id="inputTime" name="inputTime">
+    Topic Length (Hours):   <input type="text" v-model="inputLength" id="inputLength" name="inputLength">
+  
+    <button type="submit" @click="saveTopic" class="btn btn-success">Save</button>
+  
+</form>
+<br/>
+<div class="input-group input-group-sm mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-sm">Search By Topic:</span>
+    </div>
+    <input type="text" v-model="search" placeholder="Enter Keyword">
+  </div>
+
+<div id="filter">
+    <h2>Filter By Price</h2>
+    <select  v-model='selectedPrice' size ="5" style="width:200px">
+      <option v-for='course in myObject'>
+        {{course.price}}
+      </option>
+    </select>
+    <p>Selected Price: {{selectedPrice}}</p>
+
+</div>
+
+      <div id="courses">
+          <ul v-for="(course, index) in filteredList" class="course">
+              <br/>
+              <li>Topic:    {{course.topic}} </li>
+              <li>Location: {{course.location}}</li>
+              <li>Price €:  {{course.price}}</li>
+              <li>Time:     {{course.time}}</li>
+              <li>Duration (Hours): {{course.length}}</li> 
+              <button type="button" class="btn btn-success">Edit {{course.topic}}</button>
+              <button type="button" class="btn btn-danger"click="">Delete {{course.topic}}</button>
+               <!-- <button @click="delete(index)">X</button>
+              <button type="button" @click=(hello)></button> --> 
+              <button type="button" @click = "remove(index)">X</button>
+              <br/>
+
+              <h4>Rate Course</h4>
+              
+               Rating  <input type="radio" name="rating" value="1">1
+                      <input type="radio" name="rating" value="2">2
+                      <input type="radio" name="rating" value="3">3
+                      <input type="radio" name="rating" value="4">4
+                      <input type="radio" name="rating" value="5">5 
+          </ul>
+          <br/> 
+      </div> 
+</div>
+
+
+        <!-- Footer -->
+        <footer class="footer text-center height:30% ">
+            <div class="container">
+              <div class="row">
+        
+                <!-- Footer Location -->
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                  <h4 class="text-uppercase mb-4">Location</h4>
+                  <p class="lead mb-0">2215 John Daniel Drive
+                    <br>Clark, MO 65243</p>
+                </div>
+        
+                <!-- Footer Social Icons -->
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                  <h4 class="text-uppercase mb-4">Around the Web</h4>
+                  <a class="btn btn-outline-light btn-social mx-1" href="#">
+                    <i class="fab fa-fw fa-facebook-f"></i>
+                  </a>
+                  <a class="btn btn-outline-light btn-social mx-1" href="#">
+                    <i class="fab fa-fw fa-twitter"></i>
+                  </a>
+                  <a class="btn btn-outline-light btn-social mx-1" href="#">
+                    <i class="fab fa-fw fa-linkedin-in"></i>
+                  </a>
+                  <a class="btn btn-outline-light btn-social mx-1" href="#">
+                    <i class="fab fa-fw fa-dribbble"></i>
+                  </a>
+                </div>
+        
+                
+        
+              </div>
+            </div>
+          </footer>
     </body>
 
+    <style>
+          footer {
+                  position: fluid;
+                  bottom: 0;
+                  width: 100%;
+                  }
+
+      </style>
 </html>

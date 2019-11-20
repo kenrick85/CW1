@@ -6,6 +6,13 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   <!-- Custom fonts for this theme -->
+   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+   <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+   <link href="css/freelancer.min.css" rel="stylesheet">
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -14,63 +21,72 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 
 </head>
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-      </button>
-      <!-- <a class="navbar-brand" href="#">Logo</a> -->
-      </div>
-      <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="/index.html">Home</a></li>
-          <li><a href="#">Activities</a></li>
-          <li><a href="#" data-toggle="modal" data-target="#modalRegistration"></span>Register</a></li>
-          <li><a href="#" data-toggle="modal" data-target="#modalLoginForm"></span>Login</a></li>
-          <li><a href="/courses.html" data-toggle="modal"></span>Courses</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-      </ul>
-    </div>
-  </div>
-</nav>
-
 <body>
+<!-- Navigation -->
+  <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">Admin Area</a>
+        <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">Portfolio</a>
+            </li>
+            <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a>
+            </li>
+            <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="login.html">Logout</a>
+            </li>
+          </ul>
+        </div>
+        
+      </div>
+      
+    </nav>  
 
-<div id="app">
-  
-<form id="courses1">
-    <h2>Create New Topic</h2>
-    Topic Name:     <input type="text" v-model="inputTopic"   id="inputTopic" name="inputTopic" autofocus>
-    Topic Location: <input type="text" v-model="inputLocation" id="inputLocation" name="inputLocation">
-    Topic Price €:    <input type="text" v-model="inputPrice" id="inputPrice" name="inputPrice">
-    Topic Time:     <input type="text" v-model="inputTime" id="inputTime" name="inputTime">
-    Topic Length (Hours):   <input type="text" v-model="inputLength" id="inputLength" name="inputLength">
-  
-    <button type="submit" @click="saveTopic" class="btn btn-success">Save</button>
-  
-</form>
-<br/>
-<div class="input-group input-group-sm mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="inputGroup-sizing-sm">Search By Topic:</span>
-    </div>
-    <input type="text" v-model="search" placeholder="Enter Keyword">
-  </div>
 
-<div id="filter">
-    <h2>Filter By Price</h2>
-    <select  v-model='selectedPrice' size ="5" style="width:200px">
-      <option v-for='course in myObject'>
-        {{course.price}}
-      </option>
-    </select>
-    <p>Selected Price: {{selectedPrice}}</p>
 
-</div>
+    <div id="app" >
+      
+    
+    <br/>
+    <div id="searchContainer">
+            <div id="searchBox" class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-sm">Search By Topic:</span>
+                </div>
+                <input type="text" v-model="search" placeholder="Enter Keyword">
+              </div> 
 
-      <div id="courses">
-          <ul v-for="(course, index) in filteredList" class="course">
+            <div id="filter" >
+                <h2>Filter By Price</h2>
+                <select  v-model='selectedPrice' size ="5" style="width:200px">
+                  <option v-for='course in myObject'>
+                    {{course.price}}
+                  </option>
+                </select>
+                <p>Selected Price: {{selectedPrice}}</p>
+
+            </div>
+     </div>       
+    <form id="courses1" class="border-form">
+        <h2>Create New Topic</h2>
+        Topic Name:     <input type="text" v-model="inputTopic"   id="inputTopic" name="inputTopic" autofocus><br>
+        Topic Location: <input type="text" v-model="inputLocation" id="inputLocation" name="inputLocation"><br>
+        Topic Price €:    <input type="text" v-model="inputPrice" id="inputPrice" name="inputPrice"><br>
+        Topic Time:     <input type="text" v-model="inputTime" id="inputTime" name="inputTime"><br>
+        Topic Length (Hours):   <input type="text" v-model="inputLength" id="inputLength" name="inputLength">
+      
+        <button type="submit" @click="saveTopic" class="btn btn-success">Save</button>
+      
+    </form>
+
+      <div id="courses" >
+          <ul v-for="course in filteredList" class="course">
               <br/>
               <li>Topic:    {{course.topic}} </li>
               <li>Location: {{course.location}}</li>
@@ -79,18 +95,15 @@
               <li>Duration (Hours): {{course.length}}</li> 
               <button type="button" class="btn btn-success">Edit {{course.topic}}</button>
               <button type="button" class="btn btn-danger"click="">Delete {{course.topic}}</button>
-               <!-- <button @click="delete(index)">X</button>
-              <button type="button" @click=(hello)></button> --> 
-              <button type="button" @click = "remove(index)">X</button>
-              <br/>
+               <br/>
 
               <h4>Rate Course</h4>
-              <star-rating :increment="0.5"></star-rating>
-              <!-- Rating  <input type="radio" name="rating" value="1">1
+              
+              Rating  <input type="radio" name="rating" value="1">1
                       <input type="radio" name="rating" value="2">2
                       <input type="radio" name="rating" value="3">3
                       <input type="radio" name="rating" value="4">4
-                      <input type="radio" name="rating" value="5">5 -->
+                      <input type="radio" name="rating" value="5">5 
           </ul>
           <br/> 
       </div> 
@@ -113,19 +126,12 @@
                 search:'',
                 myObject: JSON.parse(localStorage.getItem("SavedTopics")),
                 
-                // Rating stars data:
-                 VueStarRating: ('vue-star-rating'),
-                rating: "No Rating Selected",
-                currentRating: "No Rating",
-                currentSelectedRating: "No Current Rating",
-                boundRating: 3,
-
-                
+                                
               },
 
               methods:
               
-                Vue.component('star-rating', VueStarRating.default)
+               
               ({
                 saveTopic: function(inputTopic,inputLocation,inputPrice,inputTime,inputLength)
                 {
@@ -164,38 +170,19 @@
                   
                 },
                     
-                  remove: function(index){
-                       console.log(index);
-                       localStorage.removeItem(myObj("this.topic"));
-                     //  this.$delete(this.filteredList, index);
+                  remove: function(id)
+                  {
+                       // this.myObject.pop(id,1);
+                 this.$delete(this.myObject, 1);
+                  //window.localStorage.removeItem(SavedTopics);
 
-                      // if (id === null)
-                      // {
-                      //   console.log("deleted")
-                      // } 
-                      // else
-                      // {
-                      // console.log("its not")
-                      // }
-                   //}
-                      //  remove: function(index) {
-                      //    console.log(index);
-                      // //  localStorage.removeItem('index','filteredList');
-                        
-                      // }
-                     // this.topic.$delete(index)
-                     // }
+                  // localStorage.removeItem(id);
+                  // this.$delete(localStorage.removeItem(this.myObject, id));
+                  //console.log("Item with " + id + " has been deleted");
+                  
                 },
                    
-                  setRating: function(rating) {
-                        this.rating = "You have Selected: " + rating + " stars";
-                },
-                  showCurrentRating: function(rating) {
-                        this.currentRating = (rating === 0) ? this.currentSelectedRating : "Click to select " + rating + " stars"
-                },
-                  setCurrentSelectedRating: function(rating) {
-                        this.currentSelectedRating = "You have Selected: " + rating + " stars";
-                }
+                 
               }),
             
           
@@ -231,8 +218,6 @@
                 }
               }
             });
-            
-        
         
           
             function InsertIntoLocalStorage(key,value)
@@ -257,16 +242,103 @@
       </script>
 
     <style>
-      .course 
+      .course
       {
         color: black;
         border-style: solid;
         border-color:cornflowerblue;
         width: 15%;
         padding: 2%;
+        text-align: center;
+        height: 250px;       
         
       }
+
+      #searchContainer
+      {
+        border-color:rgb(189, 180, 180);
+        border-style: solid;
+        width: 15%;
+        height: 450px;
+        float: left;
+        margin-left: 20px;
+      }
+      
+                 
+      .border-form
+      {
+        border:thin rgb(175, 155, 155) solid;
+        margin:20px;
+        padding:20px;
+        width: 15%;
+        height: 470px;
+        left: 50%;
+        margin-left: 600px;
+        list-style-type:none;
+      }
+     
+      #courses ul
+      {
+      padding: 5px;
+      margin:20px;
+      display: inline-block;
+      list-style-type:none;
+      }
+      #mainNav ul
+      {
+        float: right;
+        margin: 20px;
+      }
+
+      #searchBox
+      {
+       
+        margin:20px;      
+        
+
+      }
+
+      #filter
+      {
+        padding: 5px;
+        margin:20px;
+      }
+
     </style>
+    <!-- Footer -->
+    <footer class="footer text-center height:30% ">
+        <div class="container">
+          <div class="row">
+    
+            <!-- Footer Location -->
+            <div class="col-lg-4 mb-5 mb-lg-0">
+              <h4 class="text-uppercase mb-4">Location</h4>
+              <p class="lead mb-0">2215 John Daniel Drive
+                <br>Clark, MO 65243</p>
+            </div>
+    
+            <!-- Footer Social Icons -->
+            <div class="col-lg-4 mb-5 mb-lg-0">
+              <h4 class="text-uppercase mb-4">Around the Web</h4>
+              <a class="btn btn-outline-light btn-social mx-1" href="#">
+                <i class="fab fa-fw fa-facebook-f"></i>
+              </a>
+              <a class="btn btn-outline-light btn-social mx-1" href="#">
+                <i class="fab fa-fw fa-twitter"></i>
+              </a>
+              <a class="btn btn-outline-light btn-social mx-1" href="#">
+                <i class="fab fa-fw fa-linkedin-in"></i>
+              </a>
+              <a class="btn btn-outline-light btn-social mx-1" href="#">
+                <i class="fab fa-fw fa-dribbble"></i>
+              </a>
+            </div>
+    
+            
+    
+          </div>
+        </div>
+      </footer>
     
 </body>
 </html>
