@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <!-- Custom fonts for this theme -->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <!-- <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"> -->
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
@@ -17,14 +17,15 @@
        
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
         <link href="css/freelancer.min.css" rel="stylesheet">
-        <script src="script.js"></script> 
+        <!-- <script src="mian.js"></script>  -->
 
         <title>Register </title>
     </head>    
 
     <body>
+        <div id="app">
           <!-- Navigation -->
-        <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+          <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
             <div class="container">
               <a class="navbar-brand js-scroll-trigger" href="#page-top">Register</a>
               <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,41 +49,47 @@
           </nav>  
                     
            <div id="containerReg" class="align-middle border border-dark">
-                <form id="registerForm"   style="border:1px solid #ccc text-align: right">
+                <form id="registerForm"   style="border:1px solid #ccc text-align-right">
                     
                       <h1>Sign Up</h1>
                       <p>Please fill in this form to create an account.</p>
                       <hr>
 
                       <label for="studentName"><b>Student Name</b></label>
-                      <input required type="text" placeholder="Enter Name" id="studentName" required><br>
+                      <input required type="text" placeholder="Enter Name" id="studentName" name="studentName" v-model="studentName" required><br>
                       
                       <label for="studentSurname"><b>Student Surname</b></label>
-                      <input required type="text" placeholder="Enter Surname" id="studentSurname" required><br>
+                      <input required type="text" placeholder="Enter Surname" id="studentSurname" name="studentSurname" v-model="studentSurname" required><br>
 
-                      <label for="username"><b>Username</b></label>
-                      <input required type="text" placeholder="Choose Username" id="username" required><br>
-                  
+                                      
                       <label for="email"><b>Email</b></label>
-                      <input required type="text" placeholder="Enter Email" id="email" required><br>
+                      <input required type="text" placeholder="Enter Email" id="email" name="email" v-model="email" required><br>
                   
                       <label for="psw"><b>Password</b></label>
-                      <input required type="password" placeholder="Enter Password" id="psw" required><br>
+                      <input required type="password" placeholder="Enter Password" id="password" name="password" v-model="password" required><br>
                   
                       <label for="psw-repeat"><b>Repeat Password</b></label>
-                      <input required type="password" placeholder="Repeat Password" id="pswRepeat" required><br>
+                      <input required type="password" placeholder="Repeat Password" id="rptPassword" name="password" v-model="password" required><br>
                       
-                                
+                      <span>
+                          <input id="register" type="radio" name="login_type" value="register" checked="checked">
+                          <label for="register">Register</label>
+                      </span>
+                      <span>
+                          <input id="login" type="radio" name="login_type" value="login">
+                          <label for="login">Login</label>
+                      </span>           
                       
                       <div class="clearfix">
-                       <button type="button" class="btn-primary" onclick="registerUser()">Sign Up</button>
-                        <button type="button" class="cancelbtn" onclick="location.href='login.html'">Cancel</button>
-                        
+                       <button type="submit" class="btn-primary" @click="checkRegisterForm">Sign Up</button>
+                       <button type="button" class="cancelbtn" onclick="location.href='login.html'">Cancel</button>
+                      
 
                       </div>
-                  
+                      <output name="result"></output>
                 </form>
             </div>  
+        </div>
             <!-- Footer -->
   <footer class="footer padding-bottom: 50px ">
     <div class="container">
@@ -115,47 +122,140 @@
         
     </div>
   </footer>
-            
 
+  <script>
+  
+      const app = new Vue({
+        el: '#app',
+        data: 
+        {
+          RegistrationErrors: [],
+          LoginErrors: [],
+          studentName: '',
+          studentSurname: '',
+          email: null,
+          password: null,
+          loginEmail: null,
+          role: "user"
+        },
       
-        <!-- <script src="script.js"></script> -->
-        <script>
-          methods: {
-                      onSubmit: function() 
-                      {
-                          // check if the email already exists
-                          var users = '';
-                          var newEmail = this.email;
-                          
-                          if (localStorage.getItem('users')) { // 'users' is an array of objects
-                            users = JSON.parse(localStorage.getItem('users'));
-                            };
-                              if (users) 
-                              {
-                                if (users.some(function(user) {return user.email === newEmail})) 
-                                  {
-                                    alert('Email already exists!');
-                                    return;
-                                  }
-                              users.push({'email': newEmail, 'password': this.password});
-                              localStorage.setItem('users', JSON.stringify(users));
-                              }
+      
 
-                             else
-                            {
-                               users = [{'email': newEmail, 'password': this.password}];
-                               localStorage.setItem('users', JSON.stringify(users));
-                             }
-                        }
-                    }
-        </script>
-         <style>
-           footer {
-                position: absolute;
-                bottom: 0;
-                width: 100%;
-                
-                }
-          </style> 
+      methods:
+        {
+          checkRegisterForm: function (e) 
+          {
+            if (this.studentName && this.studentSurname && this.email && this.password) 
+            {
+              registerUser(this.email,this.studentName,this.studentSurname,this.password);
+              
+            }
+
+            this.RegistrationErrors = [];
+
+            if (!this.studentName) 
+            {
+              this.RegistrationErrors.push('First Name required.');
+            }
+            
+            if (!this.studentSurname) 
+            {
+              this.RegistrationErrors.push('Last Name required.');
+            }
+
+            if (!this.email) 
+            {
+              this.RegistrationErrors.push('E-Mail address is required.');
+            }
+
+            if (!this.password) 
+            {
+              this.RegistrationErrors.push('Password is required');
+            }
+
+            e.preventDefault();
+
+          }
+        }
+      
+        })
+        function registerUser(email,studentName,studentSurname,password)
+  {
+      //Create object to store the variables
+      var  myObj = 
+      {
+          //Mapping the fields in the object to the data being obtained through the parameters
+          'email': email,
+          'studentName': studentName,
+          'studentSurname': studentSurname,
+          'password': password,
+          'role': "user" //User may be either student, parent, serviceprovider
+      };
+
+      //Get the data saved in the local storage and save it inside a variable
+      var dataBefore = GetDataFromStorage('SavedUsers');
+
+      //Creating an empty array
+      var jsonArray = []; 
+
+      //If there is no data kept in local storage, push the data to the array
+      if (dataBefore === null)
+      {		
+          //Pushing the data into the array
+          jsonArray.push(myObj);			
+          //Saving the data from the array into local storage
+          InsertIntoLocalStorage('SavedUsers',jsonArray); 
+          alert("Account has been created successfully");    
+          console.log("Account has been created successfully");                                                   
+      }	
+      
+      else
+      {	
+          //Check if the email address already exists
+          if(checkAccount(email))              
+          {   //If the account / email address does not exist in local storage, create it        
+              dataBefore.push(myObj);
+              InsertIntoLocalStorage('SavedUsers', dataBefore);    
+              alert("Acount has been created successfully");    
+              location.href='login.html';         
+          }
+          else
+          {
+              //Notify that the email has already been used
+              alert("This email address has already been used. Please choose another email address for your account !") 
+          }
+      }
+  };
+  function GetDataFromStorage(data)
+  {
+      var parsedValue = JSON.parse(localStorage.getItem(data)); 
+      return parsedValue;                                       
+  };
+
+
+  function InsertIntoLocalStorage(key,value)
+  {
+      //The stringify function will convert the data being saved to a string
+      localStorage.setItem(key, JSON.stringify(value));
+  };
+
+
+  // CHECK ACCOUNT IF ALREADY EXISTS
+  function checkAccount(email)
+  {
+      var deSerialzedObject = GetDataFromStorage('SavedUsers');
+      console.log(deSerialzedObject);
+      
+      for(var creds of deSerialzedObject) 
+      {   
+          if(email == creds.email)  
+          {
+              return false;
+          } 
+      }
+      return true;
+  };   
+    </script>
+   
     </body>
-</html>>
+</html>

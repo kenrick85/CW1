@@ -1,8 +1,9 @@
    vm = new Vue({
-       el: '#login',
+       el: '#app',
        data: {
-           username: "ken",
+           email: "ken@ken",
            password: "123",
+           user:"",
          },
     
        checkUsers: {
@@ -13,26 +14,30 @@
      });
 
 
-  //  var usersList = [
-  //    {
-  //      username: "ken",
-  //      password: "borg"
-  //    }
-  //  ]
-  //  function checkUsers(){
-  //    var username = document.getElementById('username').value
-  //    var password = document.getElementById('password').value
-  //  for (i = 0; i < usersList.length; i++){
-  //    if(username == usersList[i].username && password == usersList[i].password) {
-  //      alert(" Welcome back " + username)
-  //      return
-  //      }
-  //    }
-  //    alert("username or password incorrect")
-  //    window.location.reload();
+    var usersList = [
+      {
+        email: "ken@ken",
+        password: "123",
+        userType: false,
+      }
+    ]
+    function checkUsers(){
+      var email = document.getElementById('email').value
+      var password = document.getElementById('password').value
+    for (i = 0; i < usersList.length; i++){
+      if(email == usersList[i].email && password == usersList[i].password && usersList[i].userType == true) {
+        window.location.href = "admin.html"
+        alert(" Hello admin " + email)
+        return
+        }
 
-  //    return
-  //  }
+         
+      }
+      alert("username or password incorrect")
+      window.location.reload();
+
+      return
+    }
   
 
 
@@ -44,6 +49,7 @@
     var registerEmail= document.getElementById('email').value
     var registerPsw = document.getElementById('psw').value
     var registerpswRepeat = document.getElementById('pswRepeat').value
+    var userRole = document.getElementById('userType').value
   
   
     for (i = 0; i < usersList.length; i++){
@@ -65,6 +71,7 @@
         email:registerEmail,
         psw :registerPsw,
         pswRepeat:registerpswRepeat,
+        userType:userRole,
       }
 
     
