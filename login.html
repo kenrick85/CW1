@@ -77,41 +77,45 @@
                 </fieldset>
               </form>
             </div>
-        </div>     
+       
     
         <!-- Footer -->
-  <footer class="footer text-center bottom ">
-        <div class="container">
-          <div class="row">
-    
-            <!-- Footer Location -->
-            <div class="col-lg-4 mb-5 mb-lg-0">
-              <h4 class="text-uppercase mb-4">Location</h4>
-              <p class="lead mb-0">2215 John Daniel Drive
-                <br>Clark, MO 65243</p>
-            </div>
-    
-            <!-- Footer Social Icons -->
-            <div class="col-lg-4 mb-5 mb-lg-0">
-              <h4 class="text-uppercase mb-4">Around the Web</h4>
-              <a class="btn btn-outline-light btn-social mx-1">
-                <i class="fab fa-fw fa-facebook-f"></i>
-              </a>
-              <a class="btn btn-outline-light btn-social mx-1" >
-                <i class="fab fa-fw fa-twitter"></i>
-              </a>
-              <a class="btn btn-outline-light btn-social mx-1" >
-                <i class="fab fa-fw fa-linkedin-in"></i>
-              </a>
-              <a class="btn btn-outline-light btn-social mx-1" >
-                <i class="fab fa-fw fa-dribbble"></i>
-              </a>
-            </div>
-    
-            
-        </div>
-        </div>
-      </footer>   
+        <footer class="footer text-center bottom ">
+              <div class="container">
+                    <div class="row">
+              
+                      <!-- Footer Location -->
+                      <div class="col-lg-4 mb-5 mb-lg-0">
+                        <h4 class="text-uppercase mb-4">Location</h4>
+                        <p class="lead mb-0">2215 John Daniel Drive
+                          <br>Clark, MO 65243</p>
+                      </div>
+              
+                      <!-- Footer Social Icons -->
+                      <div class="col-lg-4 mb-5 mb-lg-0">
+                          <h4 class="text-uppercase mb-4">Around the Web</h4>
+                          
+                          <a class="btn btn-outline-light btn-social mx-1">
+                            <i class="fab fa-fw fa-facebook-f"></i>
+                          </a>
+
+                          <a class="btn btn-outline-light btn-social mx-1" >
+                            <i class="fab fa-fw fa-twitter"></i>
+                          </a>
+
+                          <a class="btn btn-outline-light btn-social mx-1" >
+                            <i class="fab fa-fw fa-linkedin-in"></i>
+                          </a>
+
+                          <a class="btn btn-outline-light btn-social mx-1" >
+                            <i class="fab fa-fw fa-dribbble"></i>
+                          </a>
+                      </div>
+              
+                      
+                  </div>
+              </div>
+            </footer>   
               <script>
                     const app = new Vue({
                       el: '#app',
@@ -150,7 +154,7 @@
                           if(email==creds.email && password==creds.password)
                           {
                               //If there is a match
-                              alert("Successfully Logged In - You are being redirected");
+                              alert("Welcome " + email);
                               //Redirect to the page
                               
                               
@@ -162,18 +166,17 @@
               
                       if (email != creds.email || password != creds.password)
                       {
-                        alert("Account not found / Incorrect login details");
-                        console.log("Account not found / Incorrect login details");
-                      }
+                        alert("Email or password incorrect");
+                        
                   }
                 };
               
-                // function redirect(email)
-                // {
-                //   var loggedinuser = GetDataFromStorage('LoggedUser');
-                //   alert("You are logged in as " + loggedinuser);
-                //   console.log("Logged in as " + loggedinuser);
-                // }
+                 function redirect(email)
+                 {
+                   var loggedinuser = GetDataFromStorage('LoggedUser');
+                   alert("You are logged in as " + loggedinuser);
+                   console.log("Logged in as " + loggedinuser);
+                 }
               
                 function GetDataFromStorage(data)
                 {
@@ -188,6 +191,8 @@
                     localStorage.setItem(key, JSON.stringify(value));
                 };  
               </script>
+
+
             <style>
                     .bd-placeholder-img 
                     {

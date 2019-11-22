@@ -17,7 +17,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
     <link href="css/freelancer.min.css" rel="stylesheet">
-    <script src="script.js"></script> 
+    <!-- //<script src="script.js"></script>  -->
 
     
 
@@ -50,67 +50,64 @@
                 </div>
               </div>
             </nav>  
-            <div class="container">
-        </div>
+   
+       
         
-        <div id="app">
+  <div id="app">
   
-<form id="courses1">
-    <h2>Create New Topic</h2>
-    Topic Name:     <input type="text" v-model="inputTopic"   id="inputTopic" name="inputTopic" autofocus>
-    Topic Location: <input type="text" v-model="inputLocation" id="inputLocation" name="inputLocation">
-    Topic Price €:    <input type="text" v-model="inputPrice" id="inputPrice" name="inputPrice">
-    Topic Time:     <input type="text" v-model="inputTime" id="inputTime" name="inputTime">
-    Topic Length (Hours):   <input type="text" v-model="inputLength" id="inputLength" name="inputLength">
-  
-    <button type="submit" @click="saveTopic" class="btn btn-success">Save</button>
-  
-</form>
-<br/>
-<div class="input-group input-group-sm mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="inputGroup-sizing-sm">Search By Topic:</span>
-    </div>
-    <input type="text" v-model="search" placeholder="Enter Keyword">
-  </div>
+        <form id="courses1">
+            <h2>Create New Topic</h2>
+            Topic Name:     <input type="text" v-model="inputTopic"   id="inputTopic" name="inputTopic" autofocus>
+            Topic Location: <input type="text" v-model="inputLocation" id="inputLocation" name="inputLocation">
+            Topic Price €:    <input type="text" v-model="inputPrice" id="inputPrice" name="inputPrice">
+            Topic Time:     <input type="text" v-model="inputTime" id="inputTime" name="inputTime">
+            Topic Length (Hours):   <input type="text" v-model="inputLength" id="inputLength" name="inputLength">
+          
+            <button type="submit" @click="saveTopic" class="btn btn-success">Save</button>
+          
+        </form>
+        <br/>
+        <div class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Search By Topic:</span>
+            </div>
+            <input type="text" v-model="search" placeholder="Enter Keyword">
+          </div>
 
-<div id="filter">
-    <h2>Filter By Price</h2>
-    <select  v-model='selectedPrice' size ="5" style="width:200px">
-      <option v-for='course in myObject'>
-        {{course.price}}
-      </option>
-    </select>
-    <p>Selected Price: {{selectedPrice}}</p>
+        <div id="filter">
+            <h2>Filter By Price</h2>
+            <select  v-model='selectedPrice' size ="5" style="width:200px">
+              <option v-for='course in myObject'>
+                {{course.price}}
+              </option>
+            </select>
+            <p>Selected Price: {{selectedPrice}}</p>
 
-</div>
+        </div>
 
-      <div id="courses">
-          <ul v-for="(course, index) in filteredList" class="course">
-              <br/>
-              <li>Topic:    {{course.topic}} </li>
-              <li>Location: {{course.location}}</li>
-              <li>Price €:  {{course.price}}</li>
-              <li>Time:     {{course.time}}</li>
-              <li>Duration (Hours): {{course.length}}</li> 
-              <button type="button" class="btn btn-success">Edit {{course.topic}}</button>
-              <button type="button" class="btn btn-danger"click="">Delete {{course.topic}}</button>
-               <!-- <button @click="delete(index)">X</button>
-              <button type="button" @click=(hello)></button> --> 
-              <button type="button" @click = "remove(index)">X</button>
-              <br/>
+              <div id="courses">
+                  <ul v-for="course in filteredList" class="course">
+                      <br/>
+                      <li>Topic:    {{course.topic}} </li>
+                      <li>Location: {{course.location}}</li>
+                      <li>Price €:  {{course.price}}</li>
+                      <li>Time:     {{course.time}}</li>
+                      <li>Duration (Hours): {{course.length}}</li> 
+                      <button type="button" class="btn btn-success">Apply for {{course.topic}}</button>
+                                  
+                      <br/>
 
-              <h4>Rate Course</h4>
-              
-               Rating  <input type="radio" name="rating" value="1">1
-                      <input type="radio" name="rating" value="2">2
-                      <input type="radio" name="rating" value="3">3
-                      <input type="radio" name="rating" value="4">4
-                      <input type="radio" name="rating" value="5">5 
-          </ul>
-          <br/> 
-      </div> 
-</div>
+                      <h4>Rate Course</h4>
+                      
+                      Rating  <input type="radio" name="rating" value="1">1
+                              <input type="radio" name="rating" value="2">2
+                              <input type="radio" name="rating" value="3">3
+                              <input type="radio" name="rating" value="4">4
+                              <input type="radio" name="rating" value="5">5 
+                  </ul>
+                  <br/> 
+              </div> 
+        </div>
 
 
         <!-- Footer -->
@@ -147,6 +144,139 @@
               </div>
             </div>
           </footer>
+
+          <script>
+      
+
+              var data = new Vue({
+                      el: '#app',
+                      data: 
+                      {
+                        inputTopic:'',
+                        inputLocation:'',
+                        inputPrice:'',
+                        inputTime:'',
+                        inputLength:'',
+                        selectedTopic:'',
+                        selectedPrice:'',
+                        search:'',
+                        myObject: JSON.parse(localStorage.getItem("SavedTopics")),
+                        
+                                        
+                      },
+        
+                      methods:
+                      
+                       
+                      ({
+                        saveTopic: function(inputTopic,inputLocation,inputPrice,inputTime,inputLength)
+                        {
+                          //Create object to store the variables
+                          var  myObj = 
+                          {
+                              //Mapping the fields in the object to the data being obtained through the parameters
+                              'topic':    this.inputTopic,
+                             'location': this.inputLocation,
+                              'price':    this.inputPrice,
+                              'time':     this.inputTime,
+                              'length':   this.inputLength
+                          };
+        
+                          
+                          //Get the data saved in the local storage and save it inside a variable
+                          var dataBefore = GetDataFromStorage('SavedTopics');
+        
+                          //Creating an empty array
+                          var jsonArray = []; 
+        
+                          //If there is no data kept in local storage, push the data to the array
+                          if (dataBefore === null)
+                          {		
+                              //Pushing the data into the array
+                              jsonArray.push(myObj);			
+                              //Saving the data from the array into local storage
+                              InsertIntoLocalStorage('SavedTopics',jsonArray);                                                        
+                          }	
+                          
+                          else //if not null (already has data in the local storage)
+                          {	
+                              dataBefore.push(myObj);
+                              InsertIntoLocalStorage('SavedTopics', dataBefore);                 
+                          }
+                          
+                        },
+                            
+                        //   remove: function(id)
+                        //   {
+                        //        // this.myObject.pop(id,1);
+                        //  this.$delete(this.myObject, 1);
+                          //window.localStorage.removeItem(SavedTopics);
+        
+                          // localStorage.removeItem(id);
+                          // this.$delete(localStorage.removeItem(this.myObject, id));
+                          //console.log("Item with " + id + " has been deleted");
+                          
+                       // },
+                           
+                      
+                      }),
+                    
+                  
+                      computed: 
+                      
+                      {
+                          filteredList()
+                          {
+                            return this.myObject.filter(course=>
+                            {
+                              return course.topic.toLowerCase().includes(this.search.toLowerCase())
+                            })
+                          
+                             filterMembers()
+                             {
+                               let filtered = this.myObject;
+        
+                               if(this.search)
+                               {
+                                 filtered = this.myObject.filter(
+                                   m => m.inputPrice.toLowerCase().indexOf(this.search) > -1
+                                 );
+                               }
+                               if(this.selectedPrice)
+                               {
+                                 filtered = filtered.filter(
+                                 m => m.inputPrice.toLowerCase() === this.selectedPrice.toLowerCase()
+                                 );
+                               }
+                             }
+        
+                            return filtered;
+                         }
+                      }
+                    });
+                
+                  
+                    function InsertIntoLocalStorage(key,value)
+                    {
+                        //The stringify function will convert the data being saved to a string
+                        localStorage.setItem(key, JSON.stringify(value));
+                    }
+        
+                    function GetDataFromStorage(data)
+                    {
+                        var parsedValue = JSON.parse(localStorage.getItem(data)); 
+                        return parsedValue;                                       
+                    }
+        
+                    function removeFromLocalStorage(data)
+                     {
+                     //remove: function(index)
+                                // console.log(index);
+                                localStorage.removeItem(data);
+                     }
+                    
+              </script>
+        
     </body>
 
     <style>

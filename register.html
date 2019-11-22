@@ -7,9 +7,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <!-- Custom fonts for this theme -->
-  <!-- <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"> -->
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+  
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
         <script src="https://unpkg.com/vue/dist/vue.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>      
@@ -17,8 +17,7 @@
        
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
         <link href="css/freelancer.min.css" rel="stylesheet">
-        <!-- <script src="mian.js"></script>  -->
-
+       
         <title>Register </title>
     </head>    
 
@@ -75,187 +74,180 @@
                           <input id="register" type="radio" name="login_type" value="register" checked="checked">
                           <label for="register">Register</label>
                       </span>
-                      <span>
-                          <input id="login" type="radio" name="login_type" value="login">
-                          <label for="login">Login</label>
-                      </span>           
-                      
-                      <div class="clearfix">
-                       <button type="submit" class="btn-primary" @click="checkRegisterForm">Sign Up</button>
-                       <button type="button" class="cancelbtn" onclick="location.href='login.html'">Cancel</button>
-                      
+                      <div>
 
+                          <button type="submit" class="btn-primary" @click="checkRegisterForm">Sign Up</button>
+                          <button type="button" class="cancelbtn" onclick="location.href='login.html'">Cancel</button>
                       </div>
+
                       <output name="result"></output>
                 </form>
             </div>  
         </div>
             <!-- Footer -->
-  <footer class="footer padding-bottom: 50px ">
-    <div class="container">
-      <div class="row">
+            <footer class="footer padding-bottom: 50px ">
+                
+                    <div class="row">
 
-        <!-- Footer Location -->
-        <div class="col-lg-4 mb-5 mb-lg-0">
-          <h4 class="text-uppercase mb-4">Location</h4>
-          <p class="lead mb-0">2215 John Daniel Drive
-            <br>Clark, MO 65243</p>
-        </div>
+                        <!-- Footer Location -->
+                        <div class="col-lg-4 mb-5 mb-lg-0">
+                              <h4 class="text-uppercase mb-4">Location</h4>
+                              <p class="lead mb-0">2215 John Daniel Drive
+                                <br>Clark, MO 65243</p>
+                        </div>
 
-        <!-- Footer Social Icons -->
-        <div class="col-lg-4 mb-5 mb-lg-0">
-          <h4 class="text-uppercase mb-4">Around the Web</h4>
-          <a class="btn btn-outline-light btn-social mx-1" href="#">
-            <i class="fab fa-fw fa-facebook-f"></i>
-          </a>
-          <a class="btn btn-outline-light btn-social mx-1" href="#">
-            <i class="fab fa-fw fa-twitter"></i>
-          </a>
-          <a class="btn btn-outline-light btn-social mx-1" href="#">
-            <i class="fab fa-fw fa-linkedin-in"></i>
-          </a>
-          <a class="btn btn-outline-light btn-social mx-1" href="#">
-            <i class="fab fa-fw fa-dribbble"></i>
-          </a>
-        </div>
+                        <!-- Footer Social Icons -->
+                        <div class="col-lg-4 mb-5 mb-lg-0">
+                              <h4 class="text-uppercase mb-4">Around the Web</h4>
+                              <a class="btn btn-outline-light btn-social mx-1" href="#">
+                                  <i class="fab fa-fw fa-facebook-f"></i>
+                              </a>
+                              <a class="btn btn-outline-light btn-social mx-1" href="#">
+                                  <i class="fab fa-fw fa-twitter"></i>
+                              </a>
+                              <a class="btn btn-outline-light btn-social mx-1" href="#">
+                                  <i class="fab fa-fw fa-linkedin-in"></i>
+                              </a>
+                              <a class="btn btn-outline-light btn-social mx-1" href="#">
+                                  <i class="fab fa-fw fa-dribbble"></i>
+                              </a>
+                      </div>                 
+                </div>
+           </footer>
 
-        
-    </div>
-  </footer>
-
-  <script>
-  
-      const app = new Vue({
-        el: '#app',
-        data: 
-        {
-          RegistrationErrors: [],
-          LoginErrors: [],
-          studentName: '',
-          studentSurname: '',
-          email: null,
-          password: null,
-          loginEmail: null,
-          role: "user"
-        },
-      
-      
-
-      methods:
-        {
-          checkRegisterForm: function (e) 
-          {
-            if (this.studentName && this.studentSurname && this.email && this.password) 
-            {
-              registerUser(this.email,this.studentName,this.studentSurname,this.password);
-              
-            }
-
-            this.RegistrationErrors = [];
-
-            if (!this.studentName) 
-            {
-              this.RegistrationErrors.push('First Name required.');
-            }
+            <script>
             
-            if (!this.studentSurname) 
+                const app = new Vue({
+                  el: '#app',
+                  data: 
+                  {
+                    RegistrationErrors: [],
+                    LoginErrors: [],
+                    studentName: '',
+                    studentSurname: '',
+                    email: null,
+                    password: null,
+                    loginEmail: null,
+                    role: "user"
+                  },
+                
+                
+
+                methods:
+                  {
+                    checkRegisterForm: function (e) 
+                    {
+                      if (this.studentName && this.studentSurname && this.email && this.password) 
+                      {
+                        registerUser(this.email,this.studentName,this.studentSurname,this.password);
+                        
+                      }
+
+                      this.RegistrationErrors = [];
+
+                      if (!this.studentName) 
+                      {
+                        this.RegistrationErrors.push('First Name required.');
+                      }
+                      
+                      if (!this.studentSurname) 
+                      {
+                        this.RegistrationErrors.push('Last Name required.');
+                      }
+
+                      if (!this.email) 
+                      {
+                        this.RegistrationErrors.push('E-Mail address is required.');
+                      }
+
+                      if (!this.password) 
+                      {
+                        this.RegistrationErrors.push('Password is required');
+                      }
+
+                      e.preventDefault();
+
+                    }
+                  }
+                
+                  })
+                  function registerUser(email,studentName,studentSurname,password)
             {
-              this.RegistrationErrors.push('Last Name required.');
-            }
+                //Create object to store the variables
+                var  myObj = 
+                {
+                    //Mapping the fields in the object to the data being obtained through the parameters
+                    'email': email,
+                    'studentName': studentName,
+                    'studentSurname': studentSurname,
+                    'password': password,
+                    'role': "user" //User may be either student, parent, serviceprovider
+                };
 
-            if (!this.email) 
+                //Get the data saved in the local storage and save it inside a variable
+                var dataBefore = GetDataFromStorage('SavedUsers');
+
+                //Creating an empty array
+                var jsonArray = []; 
+
+                //If there is no data kept in local storage, push the data to the array
+                if (dataBefore === null)
+                {		
+                    //Pushing the data into the array
+                    jsonArray.push(myObj);			
+                    //Saving the data from the array into local storage
+                    InsertIntoLocalStorage('SavedUsers',jsonArray); 
+                    alert("Account has been created successfully");    
+                    console.log("Account has been created successfully");                                                   
+                }	
+                
+                else
+                {	
+                    //Check if the email address already exists
+                    if(checkAccount(email))              
+                    {   //If the account / email address does not exist in local storage, create it        
+                        dataBefore.push(myObj);
+                        InsertIntoLocalStorage('SavedUsers', dataBefore);    
+                        alert("Acount has been created successfully");    
+                        location.href='login.html';         
+                    }
+                    else
+                    {
+                        //Notify that the email has already been used
+                        alert("This email address has already been used. Please choose another email address for your account !") 
+                    }
+                }
+            };
+            function GetDataFromStorage(data)
             {
-              this.RegistrationErrors.push('E-Mail address is required.');
-            }
+                var parsedValue = JSON.parse(localStorage.getItem(data)); 
+                return parsedValue;                                       
+            };
 
-            if (!this.password) 
+
+            function InsertIntoLocalStorage(key,value)
             {
-              this.RegistrationErrors.push('Password is required');
-            }
-
-            e.preventDefault();
-
-          }
-        }
-      
-        })
-        function registerUser(email,studentName,studentSurname,password)
-  {
-      //Create object to store the variables
-      var  myObj = 
-      {
-          //Mapping the fields in the object to the data being obtained through the parameters
-          'email': email,
-          'studentName': studentName,
-          'studentSurname': studentSurname,
-          'password': password,
-          'role': "user" //User may be either student, parent, serviceprovider
-      };
-
-      //Get the data saved in the local storage and save it inside a variable
-      var dataBefore = GetDataFromStorage('SavedUsers');
-
-      //Creating an empty array
-      var jsonArray = []; 
-
-      //If there is no data kept in local storage, push the data to the array
-      if (dataBefore === null)
-      {		
-          //Pushing the data into the array
-          jsonArray.push(myObj);			
-          //Saving the data from the array into local storage
-          InsertIntoLocalStorage('SavedUsers',jsonArray); 
-          alert("Account has been created successfully");    
-          console.log("Account has been created successfully");                                                   
-      }	
-      
-      else
-      {	
-          //Check if the email address already exists
-          if(checkAccount(email))              
-          {   //If the account / email address does not exist in local storage, create it        
-              dataBefore.push(myObj);
-              InsertIntoLocalStorage('SavedUsers', dataBefore);    
-              alert("Acount has been created successfully");    
-              location.href='login.html';         
-          }
-          else
-          {
-              //Notify that the email has already been used
-              alert("This email address has already been used. Please choose another email address for your account !") 
-          }
-      }
-  };
-  function GetDataFromStorage(data)
-  {
-      var parsedValue = JSON.parse(localStorage.getItem(data)); 
-      return parsedValue;                                       
-  };
+                //The stringify function will convert the data being saved to a string
+                localStorage.setItem(key, JSON.stringify(value));
+            };
 
 
-  function InsertIntoLocalStorage(key,value)
-  {
-      //The stringify function will convert the data being saved to a string
-      localStorage.setItem(key, JSON.stringify(value));
-  };
-
-
-  // CHECK ACCOUNT IF ALREADY EXISTS
-  function checkAccount(email)
-  {
-      var deSerialzedObject = GetDataFromStorage('SavedUsers');
-      console.log(deSerialzedObject);
-      
-      for(var creds of deSerialzedObject) 
-      {   
-          if(email == creds.email)  
-          {
-              return false;
-          } 
-      }
-      return true;
-  };   
-    </script>
+            // CHECK ACCOUNT IF ALREADY EXISTS
+            function checkAccount(email)
+            {
+                var deSerialzedObject = GetDataFromStorage('SavedUsers');
+                console.log(deSerialzedObject);
+                
+                for(var creds of deSerialzedObject) 
+                {   
+                    if(email == creds.email)  
+                    {
+                        return false;
+                    } 
+                }
+                return true;
+            };   
+              </script>
    
     </body>
 </html>
