@@ -15,20 +15,12 @@
         <link href="css/freelancer.min.css" rel="stylesheet">
 
 
-        <!-- <link href="//cdn.bootcss.com/pure/0.6.0/pure-min.css" rel="stylesheet">      -->
-        <!-- <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/sign-in/">  -->
-        <!-- <link href="/docs/4.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">  -->
-        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">     -->
-
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>      
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>      
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> 
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
        
-<!--   
-       //<script  src="script.js"></script>  -->
-
        
     </head>
 
@@ -140,54 +132,41 @@
                 {
                   var email = document.forms["form"]["email"].value; 
                   var password = document.forms["form"]["password"].value; 
-                  var deSerialzedObject = GetDataFromStorage("SavedUsers");
+                  var savedData = GetFromStorage("SavedUsers");
               
-                  //If the local storage is not empty, meaning that there are stored credentials,
-                  //for each credential in storage, check if email and password match the ones entered
-                  //in the form by the user 
-                  if(deSerialzedObject !== null)
+                  if(savedData !== null)
                   {
-                      //Looping through each and every credential detail pair stored in local storage
-                      for(var creds of deSerialzedObject) 
+                      for(var details of savedData) 
                       {
                           //Check if the email and password entered match what is stored in the local storage
-                          if(email==creds.email && password==creds.password)
+                          if(email==details.email && password==details.password)
                           {
                               //If there is a match
-                              alert("Welcome " + email);
-                              //Redirect to the page
+                              alert("Welcome " + email);    
+                              // location.href='login.html'                                      
                               
-                              
-                              //Save the users details in local storage
-                              InsertIntoLocalStorage('LoggedUser', email);
+                              putInStorage('LoggedUser', email);
                               return false;
                           }
                       }
               
-                      if (email != creds.email || password != creds.password)
+                      if (email != details.email || password != details.password)
                       {
                         alert("Email or password incorrect");
                         
                   }
                 };
               
-                 function redirect(email)
-                 {
-                   var loggedinuser = GetDataFromStorage('LoggedUser');
-                   alert("You are logged in as " + loggedinuser);
-                   console.log("Logged in as " + loggedinuser);
-                 }
-              
-                function GetDataFromStorage(data)
+                              
+                function GetFromStorage(data)
                 {
                     var parsedValue = JSON.parse(localStorage.getItem(data)); 
                     return parsedValue;                                       
                 };
               
               
-                function InsertIntoLocalStorage(key,value)
+                function putInStorage(key,value)
                 {
-                    //The stringify function will convert the data being saved to a string
                     localStorage.setItem(key, JSON.stringify(value));
                 };  
               </script>
